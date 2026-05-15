@@ -27,9 +27,8 @@ test('it should delete a product successfully and return 204', function () {
         ->assertNoContent(); // Verifica especificamente o status 204
 
     // Verifica se saiu do banco (ou se foi marcado como excluído se usar SoftDelete)
-    $this->assertDatabaseMissing('products', [
-        'id' => $product->id,
-        'deleted_at' => null
+    $this->assertSoftDeleted('products', [
+        'id' => $product->id
     ]);
 });
 

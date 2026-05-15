@@ -15,7 +15,7 @@ use Dedoc\Scramble\Attributes\Group;
 final class StoreController extends Controller
 {
     /**
-     * Criar novo produto
+     * Criar Produto
      *
      * Registra um novo produto no catálogo. É necessário vincular a uma categoria existente
      * e possuir a permissão `product.create`.
