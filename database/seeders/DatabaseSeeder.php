@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Database\Seeders;
 
 use App\Models\User;
+use Database\Seeders\Catalog\CategorySeeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
@@ -25,6 +26,11 @@ class DatabaseSeeder extends Seeder
             'name' => 'caio',
             'email' => 'caioamorim732@gmail.com',
             'password' => bcrypt('12345678'),
+        ]);
+
+        $this->call([
+            PermissionSeeder::class,
+            CategorySeeder::class,
         ]);
     }
 }

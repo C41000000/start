@@ -24,7 +24,7 @@ return new class extends Migration
                 ->comment('Saldo atual em estoque (suporta 3 casas decimais para pesos)');
             $table->boolean('is_active')->default(true)
                 ->comment('Inativa o produto sem precisar apagar do banco');
-
+            $table->softDeletes();
             $table->timestamps();
         });
     }

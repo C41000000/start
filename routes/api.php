@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Catalog\Products\DestroyController;
 use App\Http\Controllers\Catalog\Products\IndexController;
 use App\Http\Controllers\Catalog\Products\StoreController;
 use App\Http\Controllers\Catalog\Products\UpdateController;
@@ -28,6 +29,9 @@ Route::middleware('auth:api')->prefix('v1')->group(function () {
 
         Route::put('/{uuid}', UpdateController::class)
             ->name('products.update');
+
+        Route::delete('/{uuid}', DestroyController::class)
+            ->name('products.destroy');
     });
 
 });
