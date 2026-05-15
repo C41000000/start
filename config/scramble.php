@@ -142,5 +142,5 @@ return [
             'scheme' => 'bearer',
             'bearerFormat' => 'JWT',
         ],
-    ]
+    ],
 ];

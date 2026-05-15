@@ -7,7 +7,7 @@ namespace App\Actions\Catalog\Products;
 use App\Actions\Catalog\Categories\FetchCategoryByUuidAction;
 use App\Models\Catalog\Product;
 
-final readonly class StoreAction
+final readonly class UpdateAction
 {
     public function __construct(
         private Product $product,
@@ -15,14 +15,20 @@ final readonly class StoreAction
     ) {}
 
     /**
+     * @param string $uuid
      * @param array $data
-     * @return Product
+     * @return mixed
      */
-    public function execute(array $data): Product
+    public function execute(string $uuid, array $data): Product
     {
+        $product = $this->product->where('uuid', $uuid)->first();
         $category = $this->fetchCategoryByUuidAction->execute($data['category_id']);
-        $data['category_id'] = $category->id;
 
-        return $this->product->create($data);
+        abort_if(! $product, 404, 'product not found');
+
+        $data['category_id'] = $category->id;
+        $product->update($data);
+
+        return $product;
     }
 }

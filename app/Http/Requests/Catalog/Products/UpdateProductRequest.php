@@ -6,7 +6,7 @@ namespace App\Http\Requests\Catalog\Products;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreProductRequest extends FormRequest
+class UpdateProductRequest extends FormRequest
 {
     /**
      * Determina se o usuário está autorizado a fazer essa requisição.

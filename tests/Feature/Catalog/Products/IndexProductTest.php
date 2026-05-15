@@ -1,13 +1,15 @@
 <?php
 
-use App\Models\Catalog\Category;
+declare(strict_types=1);
+
 use App\Models\Catalog\Product;
 use App\Models\User;
 use Spatie\Permission\Models\Permission;
+use Spatie\Permission\PermissionRegistrar;
 
 beforeEach(function () {
     // Limpa o cache para evitar conflitos de permissão entre testes
-    app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
+    app()[PermissionRegistrar::class]->forgetCachedPermissions();
     Permission::findOrCreate('product.view', 'api');
 });
 
@@ -29,11 +31,11 @@ test('it should list products with pagination and correct json structure', funct
         ->assertJsonStructure([
             'data' => [
                 '*' => [
-                    'id', 'uuid', 'name', 'price', 'category' => ['id', 'name']
-                ]
+                    'id', 'uuid', 'name', 'price', 'category' => ['id', 'name'],
+                ],
             ],
             'meta' => ['current_page', 'last_page', 'total'],
-            'links' => ['first', 'last', 'prev', 'next']
+            'links' => ['first', 'last', 'prev', 'next'],
         ]);
 });
 
@@ -66,7 +68,7 @@ test('it should return products ordered by price descending', function () {
     $response = $this->actingAs($user, 'api')
         ->getJson(route('products.index', [
             'sort_by' => 'price',
-            'sort_order' => 'desc'
+            'sort_order' => 'desc',
         ]));
 
     // Assert

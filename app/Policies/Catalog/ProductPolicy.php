@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Policies\Catalog;
 
 use App\Models\Catalog\Product;
@@ -10,14 +12,14 @@ class ProductPolicy
     /**
      * O "Super-Poder": Se for admin, ignora as checagens abaixo e libera tudo.
      */
-//    public function before(User $user, string $ability): ?bool
-//    {
-//        if ($user->hasRole('admin')) {
-//            return true;
-//        }
-//
-//        return null; // Continua para os métodos abaixo se não for admin
-//    }
+    //    public function before(User $user, string $ability): ?bool
+    //    {
+    //        if ($user->hasRole('admin')) {
+    //            return true;
+    //        }
+    //
+    //        return null; // Continua para os métodos abaixo se não for admin
+    //    }
 
     /**
      * Determine whether the user can view any models.
@@ -46,7 +48,7 @@ class ProductPolicy
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Product $product): bool
+    public function update(User $user): bool
     {
         return $user->hasPermissionTo('product.update');
     }

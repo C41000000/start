@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models\Catalog;
 
 use App\Models\BaseModel;
@@ -24,6 +26,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Product extends BaseModel
 {
     use HasFactory;
+
     protected $fillable = [
         'category_id',
         'name',

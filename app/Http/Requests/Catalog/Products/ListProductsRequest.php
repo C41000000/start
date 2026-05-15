@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Requests\Catalog\Products;
 
 use Illuminate\Foundation\Http\FormRequest;
@@ -21,14 +23,13 @@ class ListProductsRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'search'      => ['nullable', 'string', 'max:255'],
+            'search' => ['nullable', 'string', 'max:255'],
             'category_id' => ['nullable', 'integer', 'exists:categories,id'],
-            'per_page'    => ['nullable', 'integer', 'min:1', 'max:100'],
-            'page'        => ['nullable', 'integer', 'min:1'],
+            'per_page' => ['nullable', 'integer', 'min:1', 'max:100'],
+            'page' => ['nullable', 'integer', 'min:1'],
 
-
-            'sort_by'     => ['nullable', 'string', 'in:name,price,stock_quantity,created_at'],
-            'sort_order'  => ['nullable', 'string', 'in:asc,desc'],
+            'sort_by' => ['nullable', 'string', 'in:name,price,stock_quantity,created_at'],
+            'sort_order' => ['nullable', 'string', 'in:asc,desc'],
         ];
     }
 
@@ -50,9 +51,9 @@ class ListProductsRequest extends FormRequest
     protected function prepareForValidation(): void
     {
         $this->merge([
-            'per_page'   => $this->integer('per_page', 15),
-            'page'       => $this->integer('page', 1),
-            'sort_by'    => $this->input('sort_by', 'name'), // Default por nome
+            'per_page' => $this->integer('per_page', 15),
+            'page' => $this->integer('page', 1),
+            'sort_by' => $this->input('sort_by', 'name'), // Default por nome
             'sort_order' => $this->input('sort_order', 'asc'),
         ]);
     }

@@ -1,11 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models\Catalog;
 
 use App\Models\BaseModel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-
 
 /**
  * @property string $name
@@ -16,6 +17,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Category extends BaseModel
 {
     use HasFactory;
+
     protected $fillable = [
         'name',
         'description',

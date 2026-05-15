@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Catalog\Products;
 
 use App\Actions\Catalog\Products\StoreAction;

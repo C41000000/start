@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 use App\Models\Catalog\Category;
 use App\Models\Catalog\Product;
 use App\Models\User;
 use Spatie\Permission\Models\Permission;
+use Spatie\Permission\PermissionRegistrar;
 
 beforeEach(function () {
-    app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
+    app()[PermissionRegistrar::class]->forgetCachedPermissions();
 
     Permission::findOrCreate('product.create', 'api');
 });
@@ -19,7 +22,7 @@ test('it should create a product successfully and generate uuid automatically', 
     $category = Category::factory()->create();
 
     $payload = [
-        'category_id' => $category->id,
+        'category_id' => $category->uuid,
         'name' => 'Pizza de Calabresa',
         'description' => 'Molho de tomate, mussarela e calabresa',
         'price' => 45.90,
@@ -54,8 +57,8 @@ test('it should not allow to create a product without product.create permission'
     $this->actingAs($user, 'api')
         ->postJson(route('products.store'), [
             'name' => 'Forbidden Product',
-            'category_id' => $category->id,
-            'price' => 10.00
+            'category_id' => $category->uuid,
+            'price' => 10.00,
         ])
         ->assertForbidden();
 });
