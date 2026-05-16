@@ -8,6 +8,7 @@ use App\Actions\Catalog\Products\DestroyAction;
 use App\Http\Controllers\Controller;
 use App\Models\Catalog\Product;
 use Dedoc\Scramble\Attributes\Group;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Response;
 
 #[Group('Products', weight: 2)]
@@ -18,6 +19,7 @@ class DestroyController extends Controller
      * @param string $uuid
      * @param DestroyAction $action
      * @return Response
+     * @throws AuthorizationException
      */
     public function __invoke(string $uuid, DestroyAction $action): Response
     {
